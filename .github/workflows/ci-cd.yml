@@ -1,47 +1,35 @@
 name: CI/CD
-
 on:
   push:
     branches: [main]
   pull_request:
     branches: [main]
-
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
       with:
         node-version: '20'
-
     - name: Build backend Docker image
       run: |
         cd backend
         docker build -t typing-simulator-backend .
-
     - name: Build frontend Docker image
       run: |
         cd frontend
         docker build -t typing-simulator-frontend .
-
     - name: Install Railway CLI
       run: |
         curl -sSL https://raw.githubusercontent.com/railwayapp/cli/master/install.sh | sh
-    - name: Authenticate Railway CLI
-      env:
-        RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
-      run: |
-        railway whoami
     - name: Deploy to Railway
       env:
         RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
       run: |
-        railway link ${{ secrets.RAILWAY_PROJECT_ID }}
-        railway up
-        
+        railway link ${{ secrets.RAILWAY_PROJECT_ID }} --token $RAILWAY_TOKEN
+        railway up --token $RAILWAY_TOKEN
     - name: Verify deployment
       env:
         RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
       run: |
-        railway status
+        railway status --token $RAILWAY_TOKEN
