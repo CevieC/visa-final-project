@@ -28,14 +28,15 @@ jobs:
     - name: Install Railway CLI
       run: |
         curl -sSL https://raw.githubusercontent.com/railwayapp/cli/master/install.sh | sh
-
-    - name: Deploy to Railway
+    - name: Login to Railway
+      run: railway login
       env:
         RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+    - name: Deploy to Railway
       run: |
         railway link ${{ secrets.RAILWAY_PROJECT_ID }}
         railway up
-
+        
     - name: Verify deployment
       run: |
         railway status
