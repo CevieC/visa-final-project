@@ -33,7 +33,8 @@ jobs:
       env:
         RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
       run: |
-        railway up
+        railway up --service backend
+        railway up --service frontend
 
     - name: Verify deployment
       run: |
