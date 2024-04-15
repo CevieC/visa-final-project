@@ -1,0 +1,22 @@
+# Use an official OpenJDK runtime as the base image
+FROM openjdk:17-jdk-alpine
+
+# Set the working directory in the container
+WORKDIR /app
+
+# Copy the Maven wrapper and project descriptor
+COPY typing-simulator-backend/mvnw .
+COPY typing-simulator-backend/.mvn .mvn
+COPY typing-simulator-backend/pom.xml .
+
+# Copy the application source code
+COPY typing-simulator-backend/src src
+
+# Build the application using Maven
+RUN ./mvnw clean package -DskipTests
+
+# Expose the port on which the application will run
+EXPOSE 8081
+
+# Run the Spring Boot application
+CMD ["java", "-jar", "target/typing-simulator-backend-0.0.1-SNAPSHOT.jar"]
