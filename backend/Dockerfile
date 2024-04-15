@@ -9,6 +9,9 @@ COPY typing-simulator-backend/mvnw .
 COPY typing-simulator-backend/.mvn .mvn
 COPY typing-simulator-backend/pom.xml .
 
+# Grant execute permissions to the Maven wrapper script
+RUN chmod +x mvnw
+
 # Copy the application source code
 COPY typing-simulator-backend/src src
 
