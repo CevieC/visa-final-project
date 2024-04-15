@@ -29,7 +29,7 @@ jobs:
         railway link ${{ secrets.RAILWAY_PROJECT_ID }} --token $RAILWAY_TOKEN
         railway up --token $RAILWAY_TOKEN
     - name: Verify deployment
-      env:
+      env: 
         RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
       run: |
         railway status --token $RAILWAY_TOKEN
