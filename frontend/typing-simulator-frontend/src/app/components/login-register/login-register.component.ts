@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
   imports: [MatButtonModule, MatCardModule, MatIconModule, MatInputModule, FormsModule],
   templateUrl: './login-register.component.html',
   styleUrls: ['./login-register.component.scss'],
+  providers: [AuthService],
 })
 export class LoginRegisterComponent {
   username: string = '';
