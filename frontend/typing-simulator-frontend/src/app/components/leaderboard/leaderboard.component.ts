@@ -6,7 +6,6 @@ import { MatPaginator, MatPaginatorModule, PageEvent } from '@angular/material/p
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 import { MatTabsModule } from '@angular/material/tabs';
-import { environment } from '../../../environments/environment';
 
 export interface LeaderboardData {
   position: number;
@@ -29,6 +28,7 @@ export class LeaderboardComponent implements OnInit {
   filteredData: LeaderboardData[] = [];
   pageSize = 10;
   currentPage = 0;
+  totalItems = 0;
   selectedCategory = 'Default';
   categories: string[] = ['Default', 'Time Challenge', 'Word Count Challenge', 'Random Word Mode', 'Punctuation and Special Characters'];
 
@@ -47,32 +47,32 @@ export class LeaderboardComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
-    this.applyPaginationAndSorting();
     this.fetchLeaderboardData();
   }
 
   fetchLeaderboardData() {
-    const apiUrl = `${environment.apiUrl}/api/leaderboard?category=${this.selectedCategory}`;
+    const apiUrl = `http://localhost:8080/api/leaderboard?category=${this.selectedCategory}`;
     this.http.get<LeaderboardData[]>(apiUrl).subscribe({
       next: (data: LeaderboardData[]) => {
         this.dataSource = data;
         this.filterDataByCategory();
+        this.totalItems = this.dataSource.length;
         this.applyPaginationAndSorting();
       },
       error: (error: HttpErrorResponse) => {
         console.error('Error fetching leaderboard data:', error);
         this.dataSource = this.hardcodedData;
         this.filterDataByCategory();
+        this.totalItems = this.dataSource.length;
         this.applyPaginationAndSorting();
       }
     });
   }
 
   applyPaginationAndSorting() {
-    this.filteredData = this.dataSource.slice(
-      this.currentPage * this.pageSize,
-      (this.currentPage + 1) * this.pageSize
-    );
+    const startIndex = this.currentPage * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    this.filteredData = this.dataSource.slice(startIndex, endIndex);
   }
 
   onPageChange(event: PageEvent) {
@@ -110,6 +110,7 @@ export class LeaderboardComponent implements OnInit {
 
   onCategoryChange(category: string) {
     this.selectedCategory = category;
+    this.currentPage = 0;
     this.fetchLeaderboardData();
   }
 

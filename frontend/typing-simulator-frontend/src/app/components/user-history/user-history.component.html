@@ -1,58 +1,36 @@
-<div class="container">
-  <h2>Typing History</h2>
-  <mat-table [dataSource]="typingHistory" class="mat-elevation-z8">
-    <ng-container matColumnDef="date">
-      <mat-header-cell *matHeaderCellDef>Date</mat-header-cell>
-      <mat-cell *matCellDef="let history">{{
-        history.date | date : "medium"
-      }}</mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="speed">
-      <mat-header-cell *matHeaderCellDef>Speed (WPM)</mat-header-cell>
-      <mat-cell *matCellDef="let history">{{ history.speed }}</mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="accuracy">
-      <mat-header-cell *matHeaderCellDef>Accuracy</mat-header-cell>
-      <mat-cell *matCellDef="let history">{{ history.accuracy }}%</mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="change">
-      <mat-header-cell *matHeaderCellDef>Change</mat-header-cell>
-      <mat-cell *matCellDef="let history; let i = index">
-        <span
-          *ngIf="i > 0"
-          [ngClass]="{
-            green: history.speed > typingHistory[i - 1].speed,
-            red: history.speed < typingHistory[i - 1].speed
-          }"
-        >
-          {{ history.speed - typingHistory[i - 1].speed | number : "+1.0-0" }}
-        </span>
-        <span
-          *ngIf="i > 0"
-          [ngClass]="{
-            green: history.accuracy > typingHistory[i - 1].accuracy,
-            red: history.accuracy < typingHistory[i - 1].accuracy
-          }"
-        >
-          {{
-            history.accuracy - typingHistory[i - 1].accuracy
-              | number : "+1.0-0"
-          }}%
-        </span>
-      </mat-cell>
-    </ng-container>
-
-    <mat-header-row
-      *matHeaderRowDef="['date', 'speed', 'accuracy', 'change']"
-    ></mat-header-row>
-    <mat-row
-      *matRowDef="let row; columns: ['date', 'speed', 'accuracy', 'change']"
-    ></mat-row>
-  </mat-table>
-
+<div class="user-history-container">
+  <h2>User History</h2>
+  <div class="table-container">
+    <table
+      mat-table
+      [dataSource]="filteredData"
+      matSort
+      (matSortChange)="onSortChange($event)"
+    >
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Date</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.date | date : "medium" }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="speed">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Speed (WPM)</th>
+        <td mat-cell *matCellDef="let element">{{ element.speed }}</td>
+      </ng-container>
+      <ng-container matColumnDef="accuracy">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Accuracy</th>
+        <td mat-cell *matCellDef="let element">{{ element.accuracy }}%</td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+  <mat-paginator
+    [length]="totalItems"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="[5, 10, 20]"
+    (page)="onPageChange($event)"
+  ></mat-paginator>
   <div class="button-container">
     <button mat-raised-button color="warn" (click)="resetHistory()">
       Reset History
