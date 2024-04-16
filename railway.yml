@@ -10,7 +10,6 @@ services:
       restartPolicyMaxRetries: 10
     ports:
       - 8081:8081
-
   frontend:
     path: "./frontend"
     build:
@@ -21,3 +20,5 @@ services:
       restartPolicyMaxRetries: 10
     ports:
       - 8080:8080
+    environment:
+      PORT: 8080
