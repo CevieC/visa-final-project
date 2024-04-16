@@ -2,6 +2,7 @@ version: "1"
 
 services:
   backend:
+    path: "./backend"
     build:
       builder: "DOCKERFILE"
       dockerfilePath: "./backend/Dockerfile"
@@ -10,6 +11,7 @@ services:
       restartPolicyMaxRetries: 10
 
   frontend:
+    path: "./frontend"
     build:
       builder: "DOCKERFILE"
       dockerfilePath: "./frontend/Dockerfile"
