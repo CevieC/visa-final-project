@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
@@ -13,26 +13,51 @@ export class TypingHistoryService {
 
   getTypingHistory(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl).pipe(
-      catchError(() => {
-        // Fallback to hardcoded data if API request fails
-        const hardcodedData = [
-          { date: '2023-06-10T10:30:00Z', speed: 60, accuracy: 90 },
-          { date: '2023-06-09T15:45:00Z', speed: 55, accuracy: 85 },
-          { date: '2023-06-08T09:15:00Z', speed: 50, accuracy: 80 },
-          // Add more hardcoded data entries as needed
-        ];
-        return of(hardcodedData);
+      catchError((error: HttpErrorResponse) => {
+        console.error('Error retrieving typing history:', error);
+        // Fallback to hardcoded data
+        return of(this.getHardcodedHistory());
       })
     );
   }
 
   resetTypingHistory(): Observable<any> {
     return this.http.delete(this.apiUrl).pipe(
-      catchError(() => {
-        // Handle error if API request fails
-        console.error('Error resetting typing history');
+      catchError((error: HttpErrorResponse) => {
+        console.error('Error resetting typing history:', error);
+        // Fallback to empty response
         return of(null);
       })
     );
+  }
+
+  private getHardcodedHistory(): any[] {
+    return [
+      {
+        date: '2023-06-01T10:30:00',
+        speed: 60,
+        accuracy: 95
+      },
+      {
+        date: '2023-06-02T14:45:00',
+        speed: 65,
+        accuracy: 97
+      },
+      {
+        date: '2023-06-03T09:15:00',
+        speed: 70,
+        accuracy: 98
+      },
+      {
+        date: '2023-06-04T16:20:00',
+        speed: 68,
+        accuracy: 96
+      },
+      {
+        date: '2023-06-05T11:00:00',
+        speed: 72,
+        accuracy: 99
+      }
+    ];
   }
 }

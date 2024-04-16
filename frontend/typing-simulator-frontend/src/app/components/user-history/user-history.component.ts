@@ -3,6 +3,7 @@ import { TypingHistoryService } from '../../services/typing-history.service';
 
 @Component({
   selector: 'app-user-history',
+  standalone: true,
   templateUrl: './user-history.component.html',
   styleUrls: ['./user-history.component.scss']
 })

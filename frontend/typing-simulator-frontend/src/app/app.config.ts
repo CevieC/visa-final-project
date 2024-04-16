@@ -1,7 +1,7 @@
 import { ApplicationConfig } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
-import { UserProfileService } from './services/user-profile.service';
+import { TypingHistoryService } from './services/typing-history.service';
 import { HttpClientModule } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideOAuthClient } from 'angular-oauth2-oidc';
@@ -14,7 +14,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
-    UserProfileService,
+    TypingHistoryService,
     HttpClientModule,
     provideAnimationsAsync(),
     provideOAuthClient(authConfig),
