@@ -5,6 +5,7 @@ import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
 import { MatPaginator, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, of } from 'rxjs';
+import { HttpClientModule } from '@angular/common/http';
 
 export interface LeaderboardData {
   position: number;
@@ -17,7 +18,7 @@ export interface LeaderboardData {
 @Component({
   selector: 'app-leaderboard',
   standalone: true,
-  imports: [CommonModule, MatTableModule, MatSortModule, MatPaginatorModule],
+  imports: [CommonModule, MatTableModule, MatSortModule, MatPaginatorModule, HttpClientModule],
   templateUrl: './leaderboard.component.html',
   styleUrls: ['./leaderboard.component.scss'],
 })
@@ -47,19 +48,20 @@ export class LeaderboardComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
-    this.fetchLeaderboardData().subscribe(
-      (data: LeaderboardData[]) => {
+    this.applyPaginationAndSorting();
+    this.fetchLeaderboardData().subscribe({
+      next: (data: LeaderboardData[]) => {
         this.dataSource = data;
         this.filteredData = data;
         this.applyPaginationAndSorting();
       },
-      (error: HttpErrorResponse) => {
+      error: (error: HttpErrorResponse) => {
         console.error('Error fetching leaderboard data:', error);
         this.dataSource = this.hardcodedData;
         this.filteredData = this.hardcodedData;
         this.applyPaginationAndSorting();
       }
-    );
+    });
   }
 
   fetchLeaderboardData() {
