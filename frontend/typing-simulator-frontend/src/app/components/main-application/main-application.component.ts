@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
@@ -9,7 +10,7 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-main-application',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, MatInputModule, MatSelectModule, MatProgressBarModule, FormsModule],
+  imports: [CommonModule, MatCardModule, MatButtonModule, MatInputModule, MatSelectModule, MatProgressBarModule, FormsModule],
   template: `
     <mat-card>
       <mat-card-title>Typing Simulator</mat-card-title>
