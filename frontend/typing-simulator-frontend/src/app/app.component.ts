@@ -24,7 +24,7 @@ import { LeaderboardComponent } from './components/leaderboard/leaderboard.compo
       <span>Typing Simulator</span>
       <span class="spacer"></span>
       <button mat-button routerLink="/login">Login/Register</button>
-      <button mat-button routerLink="/user-profile">User Profile</button>
+      <button mat-button routerLink="/user-history">User History</button>
       <button mat-button routerLink="/main-application">Main Application</button>
       <button mat-button routerLink="/leaderboard">Leaderboard</button>
     </mat-toolbar>
