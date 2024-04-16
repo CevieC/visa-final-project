@@ -28,7 +28,7 @@ RUN rm /etc/nginx/conf.d/default.conf
 # Copy the custom Nginx configuration
 COPY nginx.conf /etc/nginx/conf.d
 
-# Expose the port on which the application will run
+# Expose the port on which the application will run (default is 8080)
 EXPOSE 8080
 
 # Start Nginx when the container launches
