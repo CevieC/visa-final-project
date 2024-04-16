@@ -7,6 +7,9 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { provideOAuthClient } from 'angular-oauth2-oidc';
 import { authConfig } from './auth-config';
 import { AuthService } from './services/auth.service';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -15,6 +18,9 @@ export const appConfig: ApplicationConfig = {
     HttpClientModule,
     provideAnimationsAsync(),
     provideOAuthClient(authConfig),
-    AuthService
+    AuthService,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
   ],
 };
