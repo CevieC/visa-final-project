@@ -15,6 +15,6 @@ export const authConfig: OAuthConfig = {
   scope: 'user:email',
   resourceServer: {
     allowedUrls: [environment.apiUrl],
-    sendAccessToken: true,
+    sendAccessToken: false,
   },
 };

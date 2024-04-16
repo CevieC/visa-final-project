@@ -66,6 +66,7 @@ export class MainApplicationComponent implements OnInit {
   }
 
   fetchRandomParagraph() {
+    console.log('Fetching random paragraph...');
     const apiUrl = `${environment.apiUrl}/api/typing-text/random-paragraph`;
     this.http.get(apiUrl, { responseType: 'text' }).subscribe(
       (paragraph) => {
