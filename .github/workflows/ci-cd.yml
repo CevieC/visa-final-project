@@ -12,16 +12,6 @@ jobs:
     - name: Install Railway CLI
       run: |
         curl -sSL https://raw.githubusercontent.com/railwayapp/cli/master/install.sh | sh
-    - name: Create backend service
-      env:
-        RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
-      run: |
-        railway service create backend || true
-    - name: Create frontend service
-      env:
-        RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
-      run: |
-        railway service create frontend || true
     - name: Deploy to Railway
       env:
         RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
