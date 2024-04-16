@@ -1,26 +1,42 @@
 package com.example.typingsimulatorbackend.controller;
 
+import com.example.typingsimulatorbackend.model.Entry;
+import com.example.typingsimulatorbackend.service.LeaderboardService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/leaderboard")
 public class LeaderboardController {
 
-    @GetMapping("/api/leaderboard")
-    public List<LeaderboardEntry> getLeaderboardData(@RequestParam String category) {
-        // Retrieve leaderboard data based on the category
-        List<LeaderboardEntry> leaderboardData = new ArrayList<>();
+    private final LeaderboardService leaderboardService;
 
-        // TODO: Implement the logic to fetch leaderboard data from the database or any other data source
-        // For now, let's return some hardcoded data as an example
-        leaderboardData.add(new LeaderboardEntry(1, "john_doe", category, 98, 120));
-        leaderboardData.add(new LeaderboardEntry(2, "jane_smith", category, 95, 110));
-        // Add more entries as needed
+    @Autowired
+    public LeaderboardController(LeaderboardService leaderboardService) {
+        this.leaderboardService = leaderboardService;
+    }
 
-        return leaderboardData;
+    @GetMapping
+    public List<Entry> getLeaderboardData(@RequestParam String category) {
+        return leaderboardService.getLeaderboardData(category);
+    }
+
+    @PostMapping
+    public Entry createLeaderboardEntry(@RequestBody Entry leaderboardEntry) {
+        return leaderboardService.createLeaderboardEntry(leaderboardEntry);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteLeaderboardEntry(@PathVariable Long id) {
+        leaderboardService.deleteLeaderboardEntry(id);
     }
 }

@@ -1,20 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule, DatePipe, DecimalPipe, NgClass } from '@angular/common';
-import { MatTableModule } from '@angular/material/table';
+import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
+import { MatPaginator, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
+import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
 import { HttpClient, HttpErrorResponse, HttpClientModule } from '@angular/common/http';
 import { catchError, of } from 'rxjs';
 
 @Component({
   selector: 'app-user-history',
   standalone: true,
-  imports: [CommonModule, MatTableModule, MatButtonModule, NgClass, HttpClientModule],
+  imports: [CommonModule, MatTableModule, MatButtonModule, MatPaginatorModule, MatSortModule, NgClass, HttpClientModule],
   templateUrl: './user-history.component.html',
   styleUrls: ['./user-history.component.scss'],
   providers: [DatePipe, DecimalPipe],
 })
 export class UserHistoryComponent implements OnInit {
-  typingHistory: any[] = [];
+  dataSource!: MatTableDataSource<any>;
+  displayedColumns: string[] = ['date', 'speed', 'accuracy', 'change'];
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+
   private apiUrl = 'http://localhost:8080/api/typing-history';
 
   constructor(private http: HttpClient) { }
@@ -31,7 +38,9 @@ export class UserHistoryComponent implements OnInit {
       })
     ).subscribe({
       next: (history: any[]) => {
-        this.typingHistory = history;
+        this.dataSource = new MatTableDataSource(history);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       },
       error: (error) => {
         console.error('Error retrieving typing history:', error);
@@ -47,12 +56,18 @@ export class UserHistoryComponent implements OnInit {
       })
     ).subscribe({
       next: () => {
-        this.typingHistory = [];
+        this.dataSource.data = [];
       },
       error: (error) => {
         console.error('Error resetting typing history:', error);
       }
     });
+  }
+
+  onSortChange(sortState: Sort) {
+    this.sort.active = sortState.active;
+    this.sort.direction = sortState.direction;
+    this.getTypingHistory();
   }
 
   private getHardcodedHistory(): any[] {

@@ -4,9 +4,9 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
 import { MatPaginator, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { catchError, of } from 'rxjs';
 import { HttpClientModule } from '@angular/common/http';
 import { MatTabsModule } from '@angular/material/tabs';
+import { environment } from '../../../environments/environment';
 
 export interface LeaderboardData {
   position: number;
@@ -48,7 +48,12 @@ export class LeaderboardComponent implements OnInit {
 
   ngOnInit() {
     this.applyPaginationAndSorting();
-    this.fetchLeaderboardData().subscribe({
+    this.fetchLeaderboardData();
+  }
+
+  fetchLeaderboardData() {
+    const apiUrl = `${environment.apiUrl}/api/leaderboard?category=${this.selectedCategory}`;
+    this.http.get<LeaderboardData[]>(apiUrl).subscribe({
       next: (data: LeaderboardData[]) => {
         this.dataSource = data;
         this.filterDataByCategory();
@@ -61,16 +66,6 @@ export class LeaderboardComponent implements OnInit {
         this.applyPaginationAndSorting();
       }
     });
-  }
-
-  fetchLeaderboardData() {
-    const apiUrl = `http://localhost:4200/api/leaderboard?category=${this.selectedCategory}`;
-    return this.http.get<LeaderboardData[]>(apiUrl).pipe(
-      catchError((error: HttpErrorResponse) => {
-        console.error('Error fetching leaderboard data:', error);
-        return of(this.hardcodedData);
-      })
-    );
   }
 
   applyPaginationAndSorting() {
@@ -115,19 +110,7 @@ export class LeaderboardComponent implements OnInit {
 
   onCategoryChange(category: string) {
     this.selectedCategory = category;
-    this.fetchLeaderboardData().subscribe({
-      next: (data: LeaderboardData[]) => {
-        this.dataSource = data;
-        this.filterDataByCategory();
-        this.applyPaginationAndSorting();
-      },
-      error: (error: HttpErrorResponse) => {
-        console.error('Error fetching leaderboard data:', error);
-        this.dataSource = this.hardcodedData;
-        this.filterDataByCategory();
-        this.applyPaginationAndSorting();
-      }
-    });
+    this.fetchLeaderboardData();
   }
 
   filterDataByCategory() {
