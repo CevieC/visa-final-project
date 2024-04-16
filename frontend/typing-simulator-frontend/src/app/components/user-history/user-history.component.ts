@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule, DatePipe, DecimalPipe, NgClass } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpClientModule } from '@angular/common/http';
 import { catchError, of } from 'rxjs';
 
 @Component({
   selector: 'app-user-history',
   standalone: true,
-  imports: [CommonModule, MatTableModule, MatButtonModule, NgClass],
+  imports: [CommonModule, MatTableModule, MatButtonModule, NgClass, HttpClientModule],
   templateUrl: './user-history.component.html',
   styleUrls: ['./user-history.component.scss'],
   providers: [DatePipe, DecimalPipe],
