@@ -1,33 +1,15 @@
-<nav>
-  <ul>
-    <li>
-      <a routerLink="/login" matTooltip="Login/Register"
-        ><mat-icon>login</mat-icon></a
-      >
-    </li>
-    <li>
-      <a routerLink="/user-history" matTooltip="User History"
-        ><mat-icon>history</mat-icon></a
-      >
-    </li>
-    <li>
-      <a routerLink="/main-application" matTooltip="Play Game"
-        ><mat-icon>sports_esports</mat-icon></a
-      >
-    </li>
-    <li>
-      <a routerLink="/leaderboard" matTooltip="View Leaderboard"
-        ><mat-icon>leaderboard</mat-icon></a
-      >
-    </li>
-  </ul>
-</nav>
-<div class="container">
-  <h1>Welcome to Typing Simulator</h1>
-  <p>
-    Test and improve your typing skills with our interactive typing simulator.
-  </p>
-  <a href="#" class="button">Start Typing</a>
-</div>
-<!-- <router-outlet></router-outlet>
-<app-login-register></app-login-register> -->
+<mat-toolbar color="primary">
+  <span>Typing Simulator</span>
+  <span class="spacer"></span>
+  <button mat-button routerLink="/login"><mat-icon>login</mat-icon></button>
+  <button mat-button routerLink="/user-history">
+    <mat-icon>history</mat-icon>
+  </button>
+  <button mat-button routerLink="/main-application">
+    <mat-icon>sports_esports</mat-icon>
+  </button>
+  <button mat-button routerLink="/leaderboard">
+    <mat-icon>leaderboard</mat-icon>
+  </button>
+</mat-toolbar>
+<router-outlet></router-outlet>
