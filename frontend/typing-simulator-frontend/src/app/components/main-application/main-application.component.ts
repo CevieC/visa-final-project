@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -7,11 +6,22 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-main-application',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatButtonModule, MatInputModule, MatSelectModule, MatProgressBarModule, FormsModule],
+  imports: [
+    CommonModule,
+    MatCardModule,
+    MatButtonModule,
+    MatInputModule,
+    MatSelectModule,
+    MatProgressBarModule,
+    FormsModule,
+    HttpClientModule,
+  ],
   templateUrl: './main-application.component.html',
   styleUrls: ['./main-application.component.scss'],
 })
@@ -28,15 +38,16 @@ export class MainApplicationComponent implements OnInit {
   isCorrect: boolean = true;
   progress: number = 0;
 
+  constructor(private http: HttpClient) {}
+
   ngOnInit() {
     this.generateText();
   }
 
   generateText() {
-    // Generate a random text for typing based on the selected mode
     switch (this.selectedMode) {
       case 'default':
-        this.currentText = 'The quick brown fox jumps over the lazy dog.';
+        this.fetchRandomParagraph();
         break;
       case 'time':
         this.currentText = 'This is a time challenge. Type as many words as you can in 1 minute!';
@@ -52,6 +63,18 @@ export class MainApplicationComponent implements OnInit {
         this.currentText = `This text contains punctuation marks! Can you type it accurately? Let's see.`;
         break;
     }
+  }
+
+  fetchRandomParagraph() {
+    const apiUrl = `${environment.apiUrl}/api/typing-text/random-paragraph`;
+    this.http.get(apiUrl, { responseType: 'text' }).subscribe(
+      (paragraph) => {
+        this.currentText = paragraph;
+      },
+      (error) => {
+        console.error('Error fetching random paragraph:', error);
+      }
+    );
   }
 
   startTyping() {

@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
-import { LoginRegisterComponent } from './components/login-register/login-register.component';
+// import { LoginRegisterComponent } from './components/login-register/login-register.component';
 import { UserHistoryComponent } from './components/user-history/user-history.component';
 import { MainApplicationComponent } from './components/main-application/main-application.component';
-import { LeaderboardComponent } from './components/leaderboard/leaderboard.component';
+// import { LeaderboardComponent } from './components/leaderboard/leaderboard.component';
 
 @Component({
   selector: 'app-root',
@@ -14,10 +14,10 @@ import { LeaderboardComponent } from './components/leaderboard/leaderboard.compo
     RouterModule,
     MatToolbarModule,
     MatButtonModule,
-    LoginRegisterComponent,
+    // LoginRegisterComponent,
     UserHistoryComponent,
     MainApplicationComponent,
-    LeaderboardComponent,
+    // LeaderboardComponent
   ],
   template: `
     <mat-toolbar color="primary">
