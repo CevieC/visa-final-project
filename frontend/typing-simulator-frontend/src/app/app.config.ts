@@ -15,6 +15,6 @@ export const appConfig: ApplicationConfig = {
     HttpClientModule,
     provideAnimationsAsync(),
     provideOAuthClient(authConfig),
-    AuthService,
+    AuthService
   ],
 };
