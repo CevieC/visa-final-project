@@ -1,0 +1,17 @@
+.login-register-container {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+
+  mat-card {
+    width: 400px;
+  }
+
+  mat-form-field {
+    width: 100%;
+  }
+
+  button {
+    width: 100%;
+  }
+}
