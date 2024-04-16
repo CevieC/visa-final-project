@@ -1,9 +1,19 @@
+@import '~@angular/material/theming';
+
+$dark-primary: mat-palette($mat-grey, 900);
+$dark-accent: mat-palette($mat-blue-grey, 700);
+$dark-warn: mat-palette($mat-red, 500);
+
+$dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
+
+@include angular-material-theme($dark-theme);
+
 .spacer {
   flex: 1 1 auto;
 }
 
 body {
-  background-color: #1c1c1c;
+  background-color: #121212;
   color: #f0f0f0;
 }
 
