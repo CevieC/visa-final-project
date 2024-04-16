@@ -16,11 +16,20 @@ COPY typing-simulator-frontend/ .
 # Build the Angular application
 RUN npm run build
 
+# Print the contents of the dist directory
+RUN ls -l dist/typing-simulator-frontend
+
 # Use an official Nginx runtime as the base image
 FROM nginx:alpine
 
+# Print the contents of the Nginx directory
+RUN ls -l /usr/share/nginx/html
+
 # Copy the built Angular files to the Nginx directory
 COPY --from=build /app/dist/typing-simulator-frontend /usr/share/nginx/html
+
+# Print the contents of the Nginx directory after copying
+RUN ls -l /usr/share/nginx/html
 
 # Remove the default Nginx configuration
 RUN rm /etc/nginx/conf.d/default.conf
