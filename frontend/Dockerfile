@@ -9,7 +9,7 @@ RUN npm ci
 
 COPY typing-simulator-frontend/ .
 
-RUN npm run build
+RUN npm run build -- --output-path=./dist/typing-simulator-frontend --verbose
 
 # Stage 2: Serve the Angular application using Nginx
 FROM nginx:alpine
