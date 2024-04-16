@@ -11,50 +11,8 @@ import { FormsModule } from '@angular/forms';
   selector: 'app-main-application',
   standalone: true,
   imports: [CommonModule, MatCardModule, MatButtonModule, MatInputModule, MatSelectModule, MatProgressBarModule, FormsModule],
-  template: `
-    <mat-card>
-      <mat-card-title>Typing Simulator</mat-card-title>
-      <mat-card-content>
-        <mat-form-field>
-          <mat-label>Select Mode</mat-label>
-          <mat-select [(ngModel)]="selectedMode" (selectionChange)="onModeChange()">
-            <mat-option value="default">Default</mat-option>
-            <mat-option value="time">Time Challenge</mat-option>
-            <mat-option value="words">Word Count Challenge</mat-option>
-            <mat-option value="random">Random Word Mode</mat-option>
-            <mat-option value="punctuation">Punctuation and Special Characters</mat-option>
-          </mat-select>
-        </mat-form-field>
-        <div [ngClass]="{'correct': isCorrect, 'incorrect': !isCorrect}">
-          <p>{{ currentText }}</p>
-        </div>
-        <mat-form-field>
-          <input matInput [(ngModel)]="typedText" (input)="onType()" />
-        </mat-form-field>
-        <mat-progress-bar [value]="progress"></mat-progress-bar>
-        <p>Time: {{ elapsedTime }} seconds</p>
-        <p>Accuracy: {{ accuracy }}%</p>
-        <p>Words per Minute (WPM): {{ wpm }}</p>
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-raised-button color="primary" (click)="startTyping()" [disabled]="isTyping">Start</button>
-        <button mat-raised-button color="accent" (click)="resetTyping()" [disabled]="!isTyping">Reset</button>
-      </mat-card-actions>
-    </mat-card>
-  `,
-  styles: [
-    `
-      mat-card {
-        margin: 20px;
-      }
-      .correct {
-        color: green;
-      }
-      .incorrect {
-        color: red;
-      }
-    `,
-  ],
+  templateUrl: './main-application.component.html',
+  styleUrls: ['./main-application.component.scss'],
 })
 export class MainApplicationComponent implements OnInit {
   currentText: string = '';

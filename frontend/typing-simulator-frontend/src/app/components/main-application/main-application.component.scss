@@ -1,0 +1,51 @@
+mat-card {
+  margin: 20px;
+}
+
+.typing-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.typing-text {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.correct {
+  color: green;
+}
+
+.incorrect {
+  color: red;
+}
+
+.typing-input {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.progress-bar {
+  margin-bottom: 20px;
+}
+
+.stats {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.stats p {
+  margin: 0;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+}
+
+.actions button {
+  margin: 0 10px;
+}
