@@ -3,7 +3,7 @@ import { RouterModule } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { LoginRegisterComponent } from './components/login-register/login-register.component';
-import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { UserHistoryComponent } from './components/user-history/user-history.component';
 import { MainApplicationComponent } from './components/main-application/main-application.component';
 import { LeaderboardComponent } from './components/leaderboard/leaderboard.component';
 
@@ -15,7 +15,7 @@ import { LeaderboardComponent } from './components/leaderboard/leaderboard.compo
     MatToolbarModule,
     MatButtonModule,
     LoginRegisterComponent,
-    UserProfileComponent,
+    UserHistoryComponent,
     MainApplicationComponent,
     LeaderboardComponent,
   ],

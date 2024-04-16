@@ -1,75 +1,83 @@
 .leaderboard-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #1c1c1c;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #1c1c1c;
+  color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  h2 {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 24px;
     color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  
-    h2 {
-      font-size: 28px;
+    text-align: center;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #2c2c2c;
+    border-radius: 4px;
+    overflow: hidden;
+
+    th,
+    td {
+      padding: 16px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #424242;
       font-weight: bold;
-      margin-bottom: 24px;
       color: #ffffff;
-      text-align: center;
+      text-transform: uppercase;
     }
-  
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      background-color: #2c2c2c;
-      border-radius: 4px;
-      overflow: hidden;
-  
-      th,
-      td {
-        padding: 16px;
-        text-align: left;
-      }
-  
-      th {
-        background-color: #424242;
-        font-weight: bold;
-        color: #ffffff;
-        text-transform: uppercase;
-      }
-  
-      tr:nth-child(even) {
-        background-color: #383838;
-      }
-  
-      tr:hover {
-        background-color: #4c4c4c;
-      }
+
+    tr:nth-child(even) {
+      background-color: #383838;
     }
-  
-    mat-paginator {
-      margin-top: 24px;
-      background-color: #2c2c2c;
+
+    tr:hover {
+      background-color: #4c4c4c;
+    }
+  }
+
+  mat-paginator {
+    margin-top: 24px;
+    background-color: #2c2c2c;
+    color: #ffffff;
+
+    .mat-paginator-container {
+      justify-content: center;
+    }
+
+    .mat-paginator-page-size-label,
+    .mat-paginator-range-label {
       color: #ffffff;
-  
-      .mat-paginator-container {
-        justify-content: center;
-      }
-  
-      .mat-paginator-page-size-label,
-      .mat-paginator-range-label {
-        color: #ffffff;
-      }
-  
-      .mat-paginator-page-size-select {
-        background-color: #424242;
-        color: #ffffff;
-      }
-  
-      .mat-paginator-navigation-previous,
-      .mat-paginator-navigation-next {
-        color: #ffffff;
-  
-        &[disabled] {
-          color: rgba(255, 255, 255, 0.3);
-        }
+    }
+
+    .mat-paginator-page-size-select {
+      background-color: #424242;
+      color: #ffffff;
+    }
+
+    .mat-paginator-navigation-previous,
+    .mat-paginator-navigation-next {
+      color: #ffffff;
+
+      &[disabled] {
+        color: rgba(255, 255, 255, 0.3);
       }
     }
   }
+
+  mat-tab-group {
+    margin-top: 24px;
+  }
+
+  mat-tab {
+    padding: 16px;
+  }
+}

@@ -6,11 +6,12 @@ import { MatPaginator, MatPaginatorModule, PageEvent } from '@angular/material/p
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, of } from 'rxjs';
 import { HttpClientModule } from '@angular/common/http';
+import { MatTabsModule } from '@angular/material/tabs';
 
 export interface LeaderboardData {
   position: number;
   username: string;
-  score: number;
+  category: string;
   accuracy: number;
   wpm: number;
 }
@@ -18,31 +19,29 @@ export interface LeaderboardData {
 @Component({
   selector: 'app-leaderboard',
   standalone: true,
-  imports: [CommonModule, MatTableModule, MatSortModule, MatPaginatorModule, HttpClientModule],
+  imports: [CommonModule, MatTableModule, MatSortModule, MatPaginatorModule, HttpClientModule, MatTabsModule],
   templateUrl: './leaderboard.component.html',
   styleUrls: ['./leaderboard.component.scss'],
 })
 export class LeaderboardComponent implements OnInit {
-  displayedColumns: string[] = ['position', 'username', 'score', 'accuracy', 'wpm'];
+  displayedColumns: string[] = ['position', 'username', 'category', 'accuracy', 'wpm'];
   dataSource: LeaderboardData[] = [];
   filteredData: LeaderboardData[] = [];
   pageSize = 10;
   currentPage = 0;
+  selectedCategory = 'Default';
+  categories: string[] = ['Default', 'Time Challenge', 'Word Count Challenge', 'Random Word Mode', 'Punctuation and Special Characters'];
 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   private hardcodedData: LeaderboardData[] = [
-    { position: 1, username: 'john_doe', score: 1500, accuracy: 98, wpm: 120 },
-    { position: 2, username: 'jane_smith', score: 1450, accuracy: 95, wpm: 110 },
-    { position: 3, username: 'mike_johnson', score: 1400, accuracy: 97, wpm: 100 },
-    { position: 4, username: 'sarah_lee', score: 1350, accuracy: 96, wpm: 105 },
-    { position: 5, username: 'david_brown', score: 1300, accuracy: 94, wpm: 95 },
-    { position: 6, username: 'emily_davis', score: 1250, accuracy: 93, wpm: 90 },
-    { position: 7, username: 'robert_wilson', score: 1200, accuracy: 92, wpm: 85 },
-    { position: 8, username: 'jennifer_taylor', score: 1150, accuracy: 91, wpm: 80 },
-    { position: 9, username: 'michael_anderson', score: 1100, accuracy: 90, wpm: 75 },
-    { position: 10, username: 'jessica_thomas', score: 1050, accuracy: 89, wpm: 70 },
+    { position: 1, username: 'john_doe', category: 'Default', accuracy: 98, wpm: 120 },
+    { position: 2, username: 'jane_smith', category: 'Time Challenge', accuracy: 95, wpm: 110 },
+    { position: 3, username: 'mike_johnson', category: 'Word Count Challenge', accuracy: 97, wpm: 100 },
+    { position: 4, username: 'sarah_lee', category: 'Random Word Mode', accuracy: 96, wpm: 105 },
+    { position: 5, username: 'david_brown', category: 'Punctuation and Special Characters', accuracy: 94, wpm: 95 },
+    // Add more hardcoded data for each category
   ];
 
   constructor(private http: HttpClient) { }
@@ -52,20 +51,20 @@ export class LeaderboardComponent implements OnInit {
     this.fetchLeaderboardData().subscribe({
       next: (data: LeaderboardData[]) => {
         this.dataSource = data;
-        this.filteredData = data;
+        this.filterDataByCategory();
         this.applyPaginationAndSorting();
       },
       error: (error: HttpErrorResponse) => {
         console.error('Error fetching leaderboard data:', error);
         this.dataSource = this.hardcodedData;
-        this.filteredData = this.hardcodedData;
+        this.filterDataByCategory();
         this.applyPaginationAndSorting();
       }
     });
   }
 
   fetchLeaderboardData() {
-    const apiUrl = 'http://localhost:4200/api/leaderboard'; // Replace with the correct API endpoint
+    const apiUrl = `http://localhost:4200/api/leaderboard?category=${this.selectedCategory}`;
     return this.http.get<LeaderboardData[]>(apiUrl).pipe(
       catchError((error: HttpErrorResponse) => {
         console.error('Error fetching leaderboard data:', error);
@@ -99,8 +98,8 @@ export class LeaderboardComponent implements OnInit {
             return compare(a.position, b.position, isAsc);
           case 'username':
             return compare(a.username, b.username, isAsc);
-          case 'score':
-            return compare(a.score, b.score, isAsc);
+          case 'category':
+            return compare(a.category, b.category, isAsc);
           case 'accuracy':
             return compare(a.accuracy, b.accuracy, isAsc);
           case 'wpm':
@@ -112,6 +111,27 @@ export class LeaderboardComponent implements OnInit {
     }
     this.currentPage = 0;
     this.applyPaginationAndSorting();
+  }
+
+  onCategoryChange(category: string) {
+    this.selectedCategory = category;
+    this.fetchLeaderboardData().subscribe({
+      next: (data: LeaderboardData[]) => {
+        this.dataSource = data;
+        this.filterDataByCategory();
+        this.applyPaginationAndSorting();
+      },
+      error: (error: HttpErrorResponse) => {
+        console.error('Error fetching leaderboard data:', error);
+        this.dataSource = this.hardcodedData;
+        this.filterDataByCategory();
+        this.applyPaginationAndSorting();
+      }
+    });
+  }
+
+  filterDataByCategory() {
+    this.dataSource = this.dataSource.filter(item => item.category === this.selectedCategory);
   }
 }
 
