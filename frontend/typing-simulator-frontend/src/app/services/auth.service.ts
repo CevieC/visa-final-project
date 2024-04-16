@@ -17,6 +17,7 @@ export class AuthService {
     }
 
     loginWithGitHub() {
+        console.log('IN SERVICE');
         this.oauthService.initLoginFlow();
     }
 

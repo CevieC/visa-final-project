@@ -14,7 +14,7 @@ import { MatIconModule } from '@angular/material/icon';
 export class LoginRegisterComponent {
   constructor(private authService: AuthService) { }
 
-  loginWithGitHub2() {
+  loginWithGitHub() {
     console.log('Logging in with GitHub...');
     this.authService.loginWithGitHub();
   }
