@@ -3,12 +3,13 @@ import { OAuthService } from 'angular-oauth2-oidc';
 import { authConfig } from '../auth-config';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
     providedIn: 'root',
 })
 export class AuthService {
-    private apiUrl = '${RAILWAY_PRIVATE_DOMAIN_FULL}/api';
+    private apiUrl = `${environment.apiUrl}/auth`;
 
     constructor(private oauthService: OAuthService, private http: HttpClient) {
         this.oauthService.configure(authConfig);
@@ -17,16 +18,6 @@ export class AuthService {
 
     loginWithGitHub() {
         this.oauthService.initLoginFlow();
-    }
-
-    login(username: string, password: string): Observable<any> {
-        const loginData = { username, password };
-        return this.http.post(`${this.apiUrl}/login`, loginData);
-    }
-
-    register(username: string, email: string, password: string): Observable<any> {
-        const registrationData = { username, email, password };
-        return this.http.post(`${this.apiUrl}/register`, registrationData);
     }
 
     logout() {

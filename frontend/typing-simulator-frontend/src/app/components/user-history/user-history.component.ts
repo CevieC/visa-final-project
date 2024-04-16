@@ -28,7 +28,7 @@ export interface UserHistoryData {
   styleUrls: ['./user-history.component.scss'],
 })
 export class UserHistoryComponent implements OnInit {
-  displayedColumns: string[] = ['date', 'speed', 'accuracy', 'actions'];
+  displayedColumns: string[] = ['date', 'speed', 'accuracy'];
   dataSource: UserHistoryData[] = [];
   filteredData: UserHistoryData[] = [];
   pageSize = 10;
@@ -93,24 +93,6 @@ export class UserHistoryComponent implements OnInit {
       },
       error: (error) => {
         console.error('Error retrieving typing history:', error);
-      }
-    });
-  }
-
-  deleteHistoryEntry(id: number) {
-    this.http.delete(`${this.apiUrl}/${id}`).pipe(
-      catchError((error: HttpErrorResponse) => {
-        console.error('Error deleting typing history entry:', error);
-        return of(null);
-      })
-    ).subscribe({
-      next: () => {
-        this.dataSource = this.dataSource.filter(entry => entry.id !== id);
-        this.totalItems = this.dataSource.length;
-        this.applyPaginationAndSorting();
-      },
-      error: (error) => {
-        console.error('Error deleting typing history entry:', error);
       }
     });
   }
