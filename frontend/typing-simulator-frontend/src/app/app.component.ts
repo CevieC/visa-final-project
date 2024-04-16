@@ -4,8 +4,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { LoginRegisterComponent } from './components/login-register/login-register.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
-// import { MainApplicationComponent } from './components/main-application/main-application.component';
-// import { LeaderboardComponent } from './components/leaderboard/leaderboard.component';
+import { MainApplicationComponent } from './components/main-application/main-application.component';
+import { LeaderboardComponent } from './components/leaderboard/leaderboard.component';
 
 @Component({
   selector: 'app-root',
@@ -16,8 +16,8 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
     MatButtonModule,
     LoginRegisterComponent,
     UserProfileComponent,
-    // MainApplicationComponent,
-    // LeaderboardComponent,
+    MainApplicationComponent,
+    LeaderboardComponent,
   ],
   template: `
     <mat-toolbar color="primary">
