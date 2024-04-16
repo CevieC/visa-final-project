@@ -36,4 +36,8 @@ export class AuthService {
     get isLoggedIn() {
         return this.oauthService.hasValidAccessToken();
     }
+
+    getUserId() {
+        return this.oauthService.getIdentityClaims()['sub'];
+    }
 }

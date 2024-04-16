@@ -1,5 +1,5 @@
 <div class="user-history-container">
-  <h2>User History</h2>
+  <h2>User Typing History</h2>
   <div class="table-container">
     <table
       mat-table
@@ -32,7 +32,8 @@
     (page)="onPageChange($event)"
   ></mat-paginator>
   <div class="button-container">
-    <button mat-raised-button color="warn" (click)="resetHistory()">
+    <button mat-raised-button color="warn" (click)="deleteAllHistoryEntries()">
+      <mat-icon>delete</mat-icon>
       Reset History
     </button>
   </div>

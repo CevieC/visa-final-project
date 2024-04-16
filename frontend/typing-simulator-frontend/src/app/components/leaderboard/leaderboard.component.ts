@@ -6,6 +6,7 @@ import { MatPaginator, MatPaginatorModule, PageEvent } from '@angular/material/p
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 import { MatTabsModule } from '@angular/material/tabs';
+import { environment } from '../../../environments/environment';
 
 export interface LeaderboardData {
   position: number;
@@ -51,7 +52,7 @@ export class LeaderboardComponent implements OnInit {
   }
 
   fetchLeaderboardData() {
-    const apiUrl = `http://localhost:8080/api/leaderboard?category=${this.selectedCategory}`;
+    const apiUrl = `${environment.apiUrl}/api/leaderboard?category=${this.selectedCategory}`;
     this.http.get<LeaderboardData[]>(apiUrl).subscribe({
       next: (data: LeaderboardData[]) => {
         this.dataSource = data;
