@@ -32,4 +32,3 @@ jobs:
         FRONTEND_SERVICE_ID: ${{ secrets.FRONTEND_SERVICE_ID }}
       run: |
         railway up --service $FRONTEND_SERVICE_ID
-        

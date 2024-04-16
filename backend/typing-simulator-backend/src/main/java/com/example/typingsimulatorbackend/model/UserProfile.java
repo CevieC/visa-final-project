@@ -14,5 +14,5 @@ public class UserProfile {
     
     private String email;
     
-    // Constructor, getters, and setters
+    // Constructor, getters and setters
 }
