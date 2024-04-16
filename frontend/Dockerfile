@@ -19,11 +19,14 @@ RUN npm run build
 # Use an Nginx base image
 FROM nginx:alpine
 
-# Copy the built Angular files to the Nginx HTML directory
-COPY --from=build /app/dist/typing-simulator-frontend /usr/share/nginx/html
+# Remove the default Nginx configuration
+RUN rm /etc/nginx/conf.d/default.conf
 
 # Copy the Nginx configuration file
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY nginx.conf /etc/nginx/conf.d/
+
+# Copy the built Angular files to the Nginx HTML directory
+COPY --from=build /app/dist/typing-simulator-frontend /usr/share/nginx/html
 
 # Expose the port on which the application will run
 EXPOSE 8080
