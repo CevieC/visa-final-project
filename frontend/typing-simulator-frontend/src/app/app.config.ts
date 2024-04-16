@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideOAuthClient } from 'angular-oauth2-oidc';
 import { authConfig } from './auth-config';
+import { AuthService } from './services/auth.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -14,5 +15,6 @@ export const appConfig: ApplicationConfig = {
     HttpClientModule,
     provideAnimationsAsync(),
     provideOAuthClient(authConfig),
+    AuthService,
   ],
 };
