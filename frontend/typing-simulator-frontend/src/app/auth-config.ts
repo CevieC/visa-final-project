@@ -1,4 +1,5 @@
 import { AuthConfig } from 'angular-oauth2-oidc';
+import { environment } from '../environments/environment';
 
 export interface OAuthConfig extends AuthConfig {
   resourceServer: {
@@ -9,11 +10,11 @@ export interface OAuthConfig extends AuthConfig {
 
 export const authConfig: OAuthConfig = {
   issuer: 'https://github.com',
-  clientId: '${GITHUB_CLIENT_ID}',
-  redirectUri: '${GITHUB_REDIRECT_URI}',
+  clientId: environment.github_client_id,
+  redirectUri: environment.github_client_id,
   scope: 'user:email',
   resourceServer: {
-    allowedUrls: ['${RAILWAY_PRIVATE_DOMAIN_FULL}'],
+    allowedUrls: [environment.apiUrl],
     sendAccessToken: true,
   },
 };
