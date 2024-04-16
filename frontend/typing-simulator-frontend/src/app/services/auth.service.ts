@@ -29,6 +29,7 @@ export class AuthService {
     }
 
     getUserId() {
-        return this.oauthService.getIdentityClaims()['sub'];
+        const claims = this.oauthService.getIdentityClaims();
+        return claims ? claims['sub'] : null;
     }
 }

@@ -15,6 +15,7 @@ export class LoginRegisterComponent {
   constructor(private authService: AuthService) { }
 
   loginWithGitHub() {
+    console.log('Logging in with GitHub...');
     this.authService.loginWithGitHub();
   }
 }
