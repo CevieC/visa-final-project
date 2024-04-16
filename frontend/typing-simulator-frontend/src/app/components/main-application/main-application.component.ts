@@ -70,6 +70,7 @@ export class MainApplicationComponent implements OnInit {
     const apiUrl = `${environment.apiUrl}/api/typing-text/random-paragraph`;
     this.http.get(apiUrl, { responseType: 'text' }).subscribe(
       (paragraph) => {
+        console.log('Fetched random paragraph:', paragraph);
         this.currentText = paragraph;
       },
       (error) => {
