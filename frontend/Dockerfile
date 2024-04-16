@@ -1,5 +1,5 @@
 # Use an official Node.js runtime as the base image
-FROM node:20.9.0-alpine AS build
+FROM node:20.9.0-alpine
 
 # Set the working directory in the container
 WORKDIR /app
@@ -13,23 +13,11 @@ RUN npm ci
 # Copy the entire frontend application to the working directory
 COPY typing-simulator-frontend/ .
 
-# Build the Angular application
-RUN npm run build
-
-# Use an Nginx base image
-FROM nginx:alpine
-
-# Remove the default Nginx configuration
-RUN rm /etc/nginx/conf.d/default.conf
-
-# Copy the Nginx configuration file
-COPY nginx.conf /etc/nginx/conf.d/
-
-# Copy the built Angular files to the Nginx HTML directory
-COPY --from=build /app/dist/typing-simulator-frontend /usr/share/nginx/html
+# Install the Angular CLI globally
+RUN npm install -g @angular/cli
 
 # Expose the port on which the application will run
 EXPOSE 8080
 
-# Start Nginx server
-CMD ["nginx", "-g", "daemon off;"]
+# Serve the Angular application using the Angular CLI
+CMD ["ng", "serve", "--host", "0.0.0.0", "--port", "8080", "--disable-host-check"]
