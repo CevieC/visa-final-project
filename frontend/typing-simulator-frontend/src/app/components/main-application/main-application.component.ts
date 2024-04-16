@@ -89,7 +89,7 @@ export class MainApplicationComponent implements OnInit {
         this.currentText = randomWords.sort(() => Math.random() - 0.5).slice(0, 5).join(' ');
         break;
       case 'punctuation':
-        this.currentText = 'This text contains punctuation marks! Can you type it accurately? Let's see.';
+        this.currentText = `This text contains punctuation marks! Can you type it accurately? Let's see.`;
         break;
     }
   }
