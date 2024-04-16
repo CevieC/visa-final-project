@@ -22,14 +22,16 @@ jobs:
       if: contains(github.event.head_commit.modified, 'backend/')
       env:
         RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+        BACKEND_SERVICE_ID: ${{ secrets.BACKEND_SERVICE_ID }}
       run: |
-        railway up --service backend
+        railway up --service $BACKEND_SERVICE_ID
     - name: Deploy frontend
       if: contains(github.event.head_commit.modified, 'frontend/')
       env:
         RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+        FRONTEND_SERVICE_ID: ${{ secrets.FRONTEND_SERVICE_ID }}
       run: |
-        railway up --service frontend
+        railway up --service $FRONTEND_SERVICE_ID
     - name: Verify deployment
       run: |
         railway status
