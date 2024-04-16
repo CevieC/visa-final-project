@@ -13,8 +13,14 @@ RUN npm ci
 # Copy the entire frontend application to the working directory
 COPY typing-simulator-frontend/ .
 
-# Expose the port on which the application will run
-EXPOSE 4200
+# Build the Angular application
+RUN npm run build
 
-# Serve the Angular application using the Angular CLI development server
-CMD ["npm", "start"]
+# Install a lightweight web server to serve the built files
+RUN npm install -g http-server
+
+# Expose the port on which the application will run
+EXPOSE 8080
+
+# Serve the built Angular application using http-server
+CMD ["http-server", "dist/typing-simulator-frontend", "-p", "8080"]
