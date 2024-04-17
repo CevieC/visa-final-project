@@ -1,11 +1,68 @@
 <div class="container">
   <mat-card>
-    <mat-card-title>Login with GitHub</mat-card-title>
+    <mat-card-title>Login</mat-card-title>
     <mat-card-content>
-      <button mat-raised-button color="primary" (click)="loginWithGitHub()">
-        <mat-icon>login</mat-icon>
-        Login with GitHub
-      </button>
+      <form (ngSubmit)="onLogin(username, password)">
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Username"
+            [(ngModel)]="username"
+            name="username"
+            required
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Password"
+            [(ngModel)]="password"
+            name="password"
+            type="password"
+            required
+          />
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit">Login</button>
+      </form>
     </mat-card-content>
   </mat-card>
+
+  <mat-card>
+    <mat-card-title>Register</mat-card-title>
+    <mat-card-content>
+      <form (ngSubmit)="onRegister(newUsername, newPassword)">
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Username"
+            [(ngModel)]="newUsername"
+            name="newUsername"
+            required
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Password"
+            [(ngModel)]="newPassword"
+            name="newPassword"
+            type="password"
+            required
+          />
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit">
+          Register
+        </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+  <button
+    mat-raised-button
+    color="warn"
+    (click)="onLogout()"
+    *ngIf="userId$ | async"
+  >
+    Logout
+  </button>
 </div>

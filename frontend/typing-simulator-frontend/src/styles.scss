@@ -34,3 +34,105 @@ body {
   background-color: #bb86fc;
   color: #000000;
 }
+
+// Dark theme variables
+$dark-primary-color: #1c1c1c;
+$dark-secondary-color: #121212;
+$dark-text-color: #f0f0f0;
+$dark-accent-color: #3f51b5;
+$dark-warn-color: #f44336;
+
+// Apply dark theme styles
+body {
+  background-color: $dark-secondary-color;
+  color: $dark-text-color;
+}
+
+// Navbar styles
+nav {
+  background-color: $dark-primary-color;
+  padding: 10px;
+
+  ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: flex-end;
+
+    li {
+      margin-left: 20px;
+
+      a {
+        color: $dark-text-color;
+        text-decoration: none;
+        transition: color 0.3s;
+
+        &:hover {
+          color: $dark-accent-color;
+        }
+      }
+    }
+  }
+}
+
+// Button styles
+button {
+  background-color: $dark-accent-color;
+  color: $dark-text-color;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: darken($dark-accent-color, 10%);
+  }
+}
+
+// Input styles
+input[type="text"],
+input[type="password"],
+textarea {
+  background-color: $dark-primary-color;
+  color: $dark-text-color;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+// Card styles
+.card {
+  background-color: $dark-primary-color;
+  color: $dark-text-color;
+  padding: 20px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+// Warning and error styles
+.warning {
+  color: $dark-warn-color;
+}
+
+.error {
+  color: $dark-warn-color;
+  font-weight: bold;
+}
+
+// Material toolbar styles
+.mat-toolbar {
+  background-color: $dark-primary-color;
+  color: $dark-text-color;
+
+  .mat-icon {
+    color: $dark-text-color;
+  }
+
+  .mat-button {
+    color: $dark-text-color;
+
+    &:hover {
+      color: $dark-accent-color;
+    }
+  }
+}
