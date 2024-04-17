@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/typing-history")
+@CrossOrigin(origins = {"https://typingtest.up.railway.app", "http://localhost:8080"})
 public class TypingHistoryController {
 
     private final TypingHistoryService typingHistoryService;
@@ -19,16 +20,19 @@ public class TypingHistoryController {
     }
 
     @GetMapping("/{userId}")
+    @CrossOrigin(origins = {"https://typingtest.up.railway.app", "http://localhost:8080"})
     public List<Entry> getTypingHistoryByUser(@PathVariable Long userId) {
         return typingHistoryService.getTypingHistoryByUser(userId);
     }
 
     @DeleteMapping("/{id}")
+    @CrossOrigin(origins = {"https://typingtest.up.railway.app", "http://localhost:8080"})
     public void deleteTypingHistoryEntry(@PathVariable Long id) {
         typingHistoryService.deleteTypingHistoryEntry(id);
     }
 
     @DeleteMapping("/user/{userId}")
+    @CrossOrigin(origins = {"https://typingtest.up.railway.app", "http://localhost:8080"})
     public void deleteAllTypingHistoryEntriesByUser(@PathVariable Long userId) {
         typingHistoryService.deleteAllTypingHistoryEntriesByUser(userId);
     }

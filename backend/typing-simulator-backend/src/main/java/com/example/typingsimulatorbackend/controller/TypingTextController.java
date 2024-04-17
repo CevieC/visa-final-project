@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/typing-text")
-@CrossOrigin(origins = "https://typingtest.up.railway.app")
+@CrossOrigin(origins = {"https://typingtest.up.railway.app", "http://localhost:8080"})
 public class TypingTextController {
     private final LoripsumService loripsumService;
 
@@ -19,6 +19,7 @@ public class TypingTextController {
     }
 
     @GetMapping("/random-paragraph")
+    @CrossOrigin(origins = {"https://typingtest.up.railway.app", "http://localhost:8080"})
     public String getRandomParagraph() {
         return loripsumService.getRandomParagraph();
     }

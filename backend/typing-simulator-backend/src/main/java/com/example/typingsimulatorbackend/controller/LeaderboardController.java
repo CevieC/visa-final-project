@@ -3,6 +3,7 @@ package com.example.typingsimulatorbackend.controller;
 import com.example.typingsimulatorbackend.model.Entry;
 import com.example.typingsimulatorbackend.service.LeaderboardService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/leaderboard")
+@CrossOrigin(origins = {"https://typingtest.up.railway.app", "http://localhost:8080"})
 public class LeaderboardController {
 
     private final LeaderboardService leaderboardService;
@@ -26,16 +28,19 @@ public class LeaderboardController {
     }
 
     @GetMapping
+    @CrossOrigin(origins = {"https://typingtest.up.railway.app", "http://localhost:8080"})
     public List<Entry> getLeaderboardData(@RequestParam String category) {
         return leaderboardService.getLeaderboardData(category);
     }
 
     @PostMapping
+    @CrossOrigin(origins = {"https://typingtest.up.railway.app", "http://localhost:8080"})
     public Entry createLeaderboardEntry(@RequestBody Entry leaderboardEntry) {
         return leaderboardService.createLeaderboardEntry(leaderboardEntry);
     }
 
     @DeleteMapping("/{id}")
+    @CrossOrigin(origins = {"https://typingtest.up.railway.app", "http://localhost:8080"})
     public void deleteLeaderboardEntry(@PathVariable Long id) {
         leaderboardService.deleteLeaderboardEntry(id);
     }
