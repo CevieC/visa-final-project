@@ -4,6 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
 import { FormsModule } from '@angular/forms';
 import { environment } from '../../../environments/environment';
@@ -12,7 +13,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-login-register',
   standalone: true,
-  imports: [MatButtonModule, MatCardModule, MatIconModule, MatInputModule, MatSnackBarModule, FormsModule, HttpClientModule],
+  imports: [MatButtonModule, MatCardModule, MatIconModule, MatInputModule, MatFormFieldModule, MatSnackBarModule, FormsModule, HttpClientModule],
   templateUrl: './login-register.component.html',
   styleUrls: ['./login-register.component.scss'],
 })
