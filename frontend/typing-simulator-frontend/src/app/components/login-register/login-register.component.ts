@@ -1,108 +1,76 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
 import { FormsModule } from '@angular/forms';
-import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
-
-interface LoginRegisterState {
-  userId: string | null;
-}
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-register',
   standalone: true,
-  imports: [
-    MatButtonModule,
-    MatCardModule,
-    MatIconModule,
-    MatInputModule,
-    MatSnackBarModule,
-    FormsModule,
-  ],
+  imports: [MatButtonModule, MatCardModule, MatIconModule, MatInputModule, MatSnackBarModule, FormsModule],
   templateUrl: './login-register.component.html',
   styleUrls: ['./login-register.component.scss'],
-  providers: [ComponentStore],
 })
 export class LoginRegisterComponent {
   username: string = '';
   password: string = '';
-  newUsername: string = '';
-  newPassword: string = '';
+  isLogin: boolean = true;
 
-  readonly store: ComponentStore<LoginRegisterState> = new ComponentStore<LoginRegisterState>({ userId: null });
-  readonly userId$: Observable<string | null>;
+  constructor(private http: HttpClient, private snackBar: MatSnackBar, private router: Router) { }
 
-  constructor(
-    private http: HttpClient,
-    private snackBar: MatSnackBar,
-    store: ComponentStore<LoginRegisterState>
-  ) {
-    this.store = store;
-    this.store.setState({ userId: null });
-    this.userId$ = this.store.select((state: { userId: any; }) => state.userId);
+  toggleForm() {
+    this.isLogin = !this.isLogin;
   }
 
-  readonly login = this.store.updater((state: any, userId: string) => ({
-    ...state,
-    userId,
-  }));
-
-  readonly logout = this.store.updater((state: any) => ({
-    ...state,
-    userId: null,
-  }));
-
-  onLogin(username: string, password: string) {
-    this.http
-      .post(`${environment.apiUrl}/api/login`, { username, password })
-      .pipe(
-        tapResponse(
-          (response: any) => {
-            this.login(response.userId);
-            this.snackBar.open('Login successful', 'Close', {
-              duration: 3000,
-            });
-          },
-          () => {
-            this.snackBar.open('Login failed', 'Close', {
-              duration: 3000,
-            });
-          }
-        )
-      )
-      .subscribe();
+  onSubmit() {
+    if (this.isLogin) {
+      this.login();
+    } else {
+      this.register();
+    }
   }
 
-  onRegister(newUsername: string, newPassword: string) {
-    this.http
-      .post(`${environment.apiUrl}/api/register`, { username: newUsername, password: newPassword })
-      .pipe(
-        tapResponse(
-          () => {
-            this.snackBar.open('Registration successful', 'Close', {
-              duration: 3000,
-            });
-          },
-          () => {
-            this.snackBar.open('Registration failed', 'Close', {
-              duration: 3000,
-            });
-          }
-        )
-      )
-      .subscribe();
+  login() {
+    const url = `${environment.apiUrl}/auth/login`;
+    const body = { username: this.username, password: this.password };
+
+    this.http.post(url, body).subscribe(
+      (response: any) => {
+        // Handle successful login
+        console.log('Login successful', response);
+        sessionStorage.setItem('user', JSON.stringify(response.user));
+        this.snackBar.open('Login successful', 'Close', { duration: 3000 });
+        this.router.navigate(['/main-application']);
+      },
+      (error) => {
+        // Handle login error
+        console.error('Login error', error);
+        this.snackBar.open('Login failed', 'Close', { duration: 3000 });
+      }
+    );
   }
 
-  onLogout() {
-    this.logout();
-    this.snackBar.open('Logout successful', 'Close', {
-      duration: 3000,
-    });
+  register() {
+    const url = `${environment.apiUrl}/auth/register`;
+    const body = { username: this.username, password: this.password };
+
+    this.http.post(url, body).subscribe(
+      (response) => {
+        // Handle successful registration
+        console.log('Registration successful', response);
+        this.snackBar.open('Registration successful', 'Close', { duration: 3000 });
+        this.toggleForm();
+      },
+      (error) => {
+        // Handle registration error
+        console.error('Registration error', error);
+        this.snackBar.open('Registration failed', 'Close', { duration: 3000 });
+      }
+    );
   }
 }

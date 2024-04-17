@@ -6,7 +6,6 @@ import { MatPaginator, MatPaginatorModule, PageEvent } from '@angular/material/p
 import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
 import { HttpClient, HttpErrorResponse, HttpClientModule } from '@angular/common/http';
 import { catchError, of } from 'rxjs';
-import { AuthService } from '../../services/auth.service';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
@@ -42,7 +41,6 @@ export class UserHistoryComponent implements OnInit {
 
   constructor(
     private http: HttpClient,
-    private authService: AuthService,
     private dialog: MatDialog
   ) { }
 
@@ -58,7 +56,7 @@ export class UserHistoryComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        const userId = this.authService.getUserId();
+        const userId = sessionStorage.getItem('user') !== null ? JSON.parse(sessionStorage.getItem('user')!).id : 1;
         this.http.delete(`${this.apiUrl}/user/${userId}`).pipe(
           catchError((error: HttpErrorResponse) => {
             console.error('Error deleting all typing history entries:', error);
@@ -79,7 +77,7 @@ export class UserHistoryComponent implements OnInit {
   }
 
   getTypingHistory() {
-    const userId = this.authService.getUserId();
+    const userId = sessionStorage.getItem('user') !== null ? JSON.parse(sessionStorage.getItem('user')!).id : 1;
     this.http.get<UserHistoryData[]>(`${this.apiUrl}/${userId}`).pipe(
       catchError((error: HttpErrorResponse) => {
         console.error('Error retrieving typing history:', error);
