@@ -1,6 +1,6 @@
 export const environment = {
     production: true,
-    apiUrl: 'https://backend-production-b3bc.up.railway.app',
+    apiUrl: 'https://dispensable-basin.railway.internal',
     github_client_id: '${GITHUB_CLIENT_ID}',
     redirectUri: '${GITHUB_REDIRECT_URI}',
 };
