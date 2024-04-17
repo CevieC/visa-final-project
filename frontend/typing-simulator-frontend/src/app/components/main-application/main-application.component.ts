@@ -37,6 +37,13 @@ export class MainApplicationComponent implements OnInit {
   selectedMode: string = 'default';
   isCorrect: boolean = true;
   progress: number = 0;
+  timeLimits = {
+    default: 0,
+    time: 60,
+    words: 0,
+    random: 0,
+    punctuation: 0
+  };
 
   constructor(private http: HttpClient) { }
 
@@ -82,17 +89,24 @@ export class MainApplicationComponent implements OnInit {
   startTyping() {
     this.isTyping = true;
     this.startTime = Date.now();
-    this.timer = setInterval(() => {
-      this.elapsedTime = Math.floor((Date.now() - this.startTime) / 1000);
-      if (this.selectedMode === 'time' && this.elapsedTime >= 60) {
-        this.stopTyping();
-      }
-    }, 1000);
+    const timeLimit = this.timeLimits[this.selectedMode as keyof typeof this.timeLimits];
+    if (timeLimit > 0) {
+      this.timer = setInterval(() => {
+        this.elapsedTime = Math.floor((Date.now() - this.startTime) / 1000);
+        if (this.elapsedTime >= timeLimit) {
+          this.stopTyping();
+        }
+      }, 1000);
+    }
   }
 
   onType() {
     if (this.typedText === this.currentText) {
       this.stopTyping();
+      if (this.selectedMode === 'time' && this.elapsedTime <= this.timeLimits.time) {
+        // User completed typing within the time limit
+        console.log('Congratulations! You completed the typing within the time limit.');
+      }
     } else {
       this.calculateAccuracy();
       this.calculateWPM();
@@ -113,6 +127,7 @@ export class MainApplicationComponent implements OnInit {
     this.accuracy = 100;
     this.wpm = 0;
     this.progress = 0;
+    clearInterval(this.timer);
     this.generateText();
   }
 
