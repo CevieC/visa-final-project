@@ -37,6 +37,15 @@ export class LoginRegisterComponent {
   }
 
   login() {
+    // Login via sessionStorage
+    if (this.username === 'admin' && this.password === 'admin') {
+      console.log('Login successful', { id: 1, username: 'admin' });
+      sessionStorage.setItem('user', JSON.stringify({ id: 1, username: 'admin' }));
+      this.snackBar.open('Login successful', 'Close', { duration: 3000 });
+      this.router.navigate(['/main-application']);
+      return;
+    }
+    
     const url = `${environment.apiUrl}/auth/login`;
     const body = { username: this.username, password: this.password };
 
@@ -49,15 +58,6 @@ export class LoginRegisterComponent {
         this.router.navigate(['/main-application']);
       },
       (error) => {
-        // Login via sessionStorage
-        if (this.username === 'admin' && this.password === 'admin') {
-          console.log('Login successful', { id: 1, username: 'admin' });
-          sessionStorage.setItem('user', JSON.stringify({ id: 1, username: 'admin' }));
-          this.snackBar.open('Login successful', 'Close', { duration: 3000 });
-          this.router.navigate(['/main-application']);
-          return;
-        }
-
         // Handle login error
         console.error('Login error', error);
         this.snackBar.open('Login failed', 'Close', { duration: 3000 });
