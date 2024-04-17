@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-login-register',
   standalone: true,
-  imports: [MatButtonModule, MatCardModule, MatIconModule, MatInputModule, MatSnackBarModule, FormsModule],
+  imports: [MatButtonModule, MatCardModule, MatIconModule, MatInputModule, MatSnackBarModule, FormsModule, HttpClientModule],
   templateUrl: './login-register.component.html',
   styleUrls: ['./login-register.component.scss'],
 })
