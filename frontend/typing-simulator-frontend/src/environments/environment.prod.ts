@@ -1,6 +1,6 @@
 export const environment = {
     production: true,
-    apiUrl: '${API_URL}',
+    apiUrl: 'backend-production-b3bc.up.railway.app',
     github_client_id: '${GITHUB_CLIENT_ID}',
     redirectUri: '${GITHUB_REDIRECT_URI}',
 };
