@@ -19,7 +19,10 @@ COPY typing-simulator-backend/src src
 RUN ./mvnw clean package -DskipTests
 
 # Expose the port on which the application will run
-EXPOSE 8080
+EXPOSE 8081
 
-# Run the Spring Boot application
-CMD ["java", "-jar", "target/typing-simulator-backend-0.0.1-SNAPSHOT.jar"]
+# # Run the Spring Boot application
+# CMD ["java", "-jar", "target/typing-simulator-backend-0.0.1-SNAPSHOT.jar"]
+
+# Set the entrypoint command
+ENTRYPOINT ["sh", "-c", "java -jar target/typing-simulator-backend-0.0.1-SNAPSHOT.jar --server.port=${SERVER_PORT}"]
