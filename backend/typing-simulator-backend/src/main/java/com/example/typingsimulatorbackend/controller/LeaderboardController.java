@@ -17,7 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/leaderboard")
-@CrossOrigin(origins = {"https://typingtest.up.railway.app", "http://localhost:8080"})
+@CrossOrigin(origins = {"https://typingtest.up.railway.app", "http://localhost:8081"})
 public class LeaderboardController {
 
     private final LeaderboardService leaderboardService;
@@ -28,19 +28,19 @@ public class LeaderboardController {
     }
 
     @GetMapping
-    @CrossOrigin(origins = {"https://typingtest.up.railway.app", "http://localhost:8080"})
+    @CrossOrigin(origins = {"https://typingtest.up.railway.app", "http://localhost:8081"})
     public List<Entry> getLeaderboardData(@RequestParam String category) {
         return leaderboardService.getLeaderboardData(category);
     }
 
     @PostMapping
-    @CrossOrigin(origins = {"https://typingtest.up.railway.app", "http://localhost:8080"})
+    @CrossOrigin(origins = {"https://typingtest.up.railway.app", "http://localhost:8081"})
     public Entry createLeaderboardEntry(@RequestBody Entry leaderboardEntry) {
         return leaderboardService.createLeaderboardEntry(leaderboardEntry);
     }
 
     @DeleteMapping("/{id}")
-    @CrossOrigin(origins = {"https://typingtest.up.railway.app", "http://localhost:8080"})
+    @CrossOrigin(origins = {"https://typingtest.up.railway.app", "http://localhost:8081"})
     public void deleteLeaderboardEntry(@PathVariable Long id) {
         leaderboardService.deleteLeaderboardEntry(id);
     }

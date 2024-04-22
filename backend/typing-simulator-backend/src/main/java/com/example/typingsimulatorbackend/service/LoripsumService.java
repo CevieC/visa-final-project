@@ -34,6 +34,6 @@ public class LoripsumService {
             fetchAndStoreLoripsumText();
         }
         int randomIndex = random.nextInt(loripsumParagraphs.size());
-        return loripsumParagraphs.get(randomIndex);
+        return loripsumParagraphs.get(randomIndex).strip();
     }
 }
