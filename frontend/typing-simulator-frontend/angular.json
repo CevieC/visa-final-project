@@ -27,6 +27,8 @@
               "node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
               "src/styles.scss"
             ],
+            "browserTarget": "typing-simulator-frontend:build",
+            "proxyConfig": "src/proxy.conf.json"
             "scripts": []
           },
           "configurations": {
