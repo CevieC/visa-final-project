@@ -17,7 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/leaderboard")
-@CrossOrigin(origins = {"https://typingtest.up.railway.app", "http://localhost:8081"})
+@CrossOrigin(origins = {"https://typingtest.up.railway.app", "http://localhost:8081", "*", "backend-production-b3bc.up.railway.app"})
 public class LeaderboardController {
 
     private final LeaderboardService leaderboardService;
