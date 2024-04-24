@@ -1,6 +1,7 @@
 {
-  "/api": {
+  "/*": {
     "target": "https://backend-production-b3bc.up.railway.app",
-    "secure": false
+    "secure": false,
+    "logLevel": "debug"
   }
 }
