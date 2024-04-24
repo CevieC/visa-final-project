@@ -28,19 +28,19 @@ public class LeaderboardController {
     }
 
     @GetMapping
-    @CrossOrigin(origins = {"https://typingtest.up.railway.app", "http://localhost:8081"})
+    @CrossOrigin(origins = {"https://typingtest.up.railway.app", "http://localhost:8081", "*", "backend-production-b3bc.up.railway.app"})
     public List<Entry> getLeaderboardData(@RequestParam String category) {
         return leaderboardService.getLeaderboardData(category);
     }
 
     @PostMapping
-    @CrossOrigin(origins = {"https://typingtest.up.railway.app", "http://localhost:8081"})
+    @CrossOrigin(origins = {"https://typingtest.up.railway.app", "http://localhost:8081", "*", "backend-production-b3bc.up.railway.app"})
     public Entry createLeaderboardEntry(@RequestBody Entry leaderboardEntry) {
         return leaderboardService.createLeaderboardEntry(leaderboardEntry);
     }
 
     @DeleteMapping("/{id}")
-    @CrossOrigin(origins = {"https://typingtest.up.railway.app", "http://localhost:8081"})
+    @CrossOrigin(origins = {"https://typingtest.up.railway.app", "http://localhost:8081", "*", "backend-production-b3bc.up.railway.app"})
     public void deleteLeaderboardEntry(@PathVariable Long id) {
         leaderboardService.deleteLeaderboardEntry(id);
     }
