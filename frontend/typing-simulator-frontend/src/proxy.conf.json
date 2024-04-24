@@ -1,0 +1,6 @@
+{
+  "/api": {
+    "target": "https://backend-production-b3bc.up.railway.app",
+    "secure": false
+  }
+}
