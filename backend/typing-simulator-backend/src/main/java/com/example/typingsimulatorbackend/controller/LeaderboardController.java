@@ -28,7 +28,7 @@ public class LeaderboardController {
     }
 
     @GetMapping
-    @CrossOrigin(origins = {"https://typingtest.up.railway.app", "http://localhost:8081", "*", "backend-production-b3bc.up.railway.app"})
+    @CrossOrigin(origins = {"https://typingtest.up.railway.app:8080", "http://localhost:8081", "*", "backend-production-b3bc.up.railway.app"})
     public List<Entry> getLeaderboardData(@RequestParam String category) {
         return leaderboardService.getLeaderboardData(category);
     }
