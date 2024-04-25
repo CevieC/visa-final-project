@@ -18,8 +18,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/user")
-@CrossOrigin(origins = { "https://typingtest.up.railway.app", "http://localhost:8081", "*",
-        "backend-production-b3bc.up.railway.app" })
+@CrossOrigin(origins = { "https://typingtest.up.railway.app", "http://localhost:8081","backend-production-b3bc.up.railway.app" })
 public class UserController {
 
     private final UserService userService;
@@ -30,15 +29,13 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    @CrossOrigin(origins = { "https://typingtest.up.railway.app:8080", "http://localhost:8080", "*",
-            "backend-production-b3bc.up.railway.app" })
+    @CrossOrigin(origins = { "https://typingtest.up.railway.app:8080", "http://localhost:8080", "backend-production-b3bc.up.railway.app" })
     public String login(@RequestBody User user) {
         return userService.login(user.getUsername(), user.getPassword());
     }
 
     @PostMapping("/register")
-    @CrossOrigin(origins = { "https://typingtest.up.railway.app", "http://localhost:8081", "*",
-            "backend-production-b3bc.up.railway.app" })
+    @CrossOrigin(origins = { "https://typingtest.up.railway.app", "http://localhost:8080","backend-production-b3bc.up.railway.app" })
     public boolean createLeaderboardEntry(@RequestBody User user) {
         return userService.register(user.getUsername(), user.getPassword());
     }
