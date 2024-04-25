@@ -26,9 +26,3 @@ EXPOSE 8080 80
 
 # Set the entrypoint command
 ENTRYPOINT ["sh", "-c", "java -jar target/typing-simulator-backend-0.0.1-SNAPSHOT.jar --server.port=8080 --debug"]
-
-# Copy the custom Nginx configuration
-COPY nginx.conf /etc/nginx/conf.d
-
-# Start Nginx when the container launches
-CMD ["nginx", "-g", "daemon off;"]
