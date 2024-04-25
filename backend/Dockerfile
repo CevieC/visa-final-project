@@ -25,4 +25,4 @@ EXPOSE 8080 80
 # CMD ["java", "-jar", "target/typing-simulator-backend-0.0.1-SNAPSHOT.jar"]
 
 # Set the entrypoint command
-ENTRYPOINT ["sh", "-c", "java -jar target/typing-simulator-backend-0.0.1-SNAPSHOT.jar --server.port=8080 --debug"]
+ENTRYPOINT ["sh", "-c", "java -jar target/typing-simulator-backend-0.0.1-SNAPSHOT.jar --server.port=80 --debug"]
