@@ -28,7 +28,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/login")
+    @PostMapping("/login")
     @CrossOrigin(origins = { "https://typingtest.up.railway.app:8080", "http://localhost:8080", "backend-production-b3bc.up.railway.app" })
     public String login(@RequestBody User user) {
         return userService.login(user.getUsername(), user.getPassword());
