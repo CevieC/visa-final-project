@@ -9,9 +9,9 @@ services:
       restartPolicyType: "ON_FAILURE"
       restartPolicyMaxRetries: 10
     ports:
-      - 80:8080
+      - 81:81
     environment:
-      PORT: 8080
+      PORT: 81
   frontend:
     path: "./frontend"
     build:
