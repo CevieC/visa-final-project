@@ -25,4 +25,11 @@ EXPOSE 8080 80
 # CMD ["java", "-jar", "target/typing-simulator-backend-0.0.1-SNAPSHOT.jar"]
 
 # Set the entrypoint command
-ENTRYPOINT ["sh", "-c", "java -jar target/typing-simulator-backend-0.0.1-SNAPSHOT.jar --server.port=81 --debug"]
+ENTRYPOINT ["sh", "-c", "java -jar target/typing-simulator-backend-0.0.1-SNAPSHOT.jar --server.port=8080 --debug"]
+
+# Remove the default Nginx configuration
+RUN rm /etc/nginx/conf.d/default.conf
+
+# Copy the custom Nginx configuration
+COPY nginx.conf /etc/nginx/conf.d
+
