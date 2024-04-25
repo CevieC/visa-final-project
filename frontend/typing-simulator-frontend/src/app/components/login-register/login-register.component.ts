@@ -46,7 +46,7 @@ export class LoginRegisterComponent {
       return;
     }
     
-    const url = `${environment.apiUrl}/auth/login`;
+    const url = `${environment.apiUrl}/api/user/login`;
     const body = { username: this.username, password: this.password };
 
     this.http.post(url, body).subscribe(
@@ -66,7 +66,7 @@ export class LoginRegisterComponent {
   }
 
   register() {
-    const url = `${environment.apiUrl}/auth/register`;
+    const url = `${environment.apiUrl}/api/user/register`;
     const body = { username: this.username, password: this.password };
 
     this.http.post(url, body).subscribe(
