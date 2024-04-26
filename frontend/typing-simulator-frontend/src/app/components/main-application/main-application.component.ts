@@ -63,7 +63,7 @@ export class MainApplicationComponent implements OnInit {
         console.log('Combined word:', combinedWord);
         this.currentText = combinedWord;
       },
-      (error) => {
+      (error: any) => {
         console.error('Error fetching words:', error);
       }
     );
