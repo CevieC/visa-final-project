@@ -58,6 +58,7 @@ export class MainApplicationComponent implements OnInit {
   }
 
   fetchRandomWords() {
+    console.log("Calling")
     this.fetchWords().subscribe(
       (words: string[]) => {
         const combinedWord = words.join('');
@@ -71,6 +72,7 @@ export class MainApplicationComponent implements OnInit {
   }
 
   generateText() {
+    console.log("this.selectedMode : ", this.selectedMode);
     switch (this.selectedMode) {
       case 'default':
         this.fetchRandomParagraph();
