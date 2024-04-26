@@ -51,6 +51,17 @@ export class MainApplicationComponent implements OnInit {
     this.generateText();
   }
 
+  async function fetchWords() {
+    try {
+      const response = await fetch('https://random-word-api.herokuapp.com/word?number=10');
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Error fetching words:', error);
+      return [];
+    }
+  }
+
   generateText() {
     switch (this.selectedMode) {
       case 'default':
@@ -154,6 +165,7 @@ export class MainApplicationComponent implements OnInit {
     const typed = this.typedText.split('');
     const total = this.currentText.split('');
     this.progress = (typed.length / total.length) * 100;
+    console.log("this.progress" , this.progress)
   }
 
   onModeChange() {
