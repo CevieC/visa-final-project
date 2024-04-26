@@ -147,6 +147,7 @@ export class MainApplicationComponent implements OnInit {
     const typed = this.typedText.split('');
     const actual = this.currentText.slice(0, typed.length).split('');
     this.isCorrect = typed.every((char, index) => char === actual[index]);
+    console.log("this.isCorrect" , this.isCorrect)
   }
 
   updateProgress() {
