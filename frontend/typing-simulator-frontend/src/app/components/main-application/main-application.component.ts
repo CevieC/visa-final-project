@@ -77,14 +77,14 @@ export class MainApplicationComponent implements OnInit {
         this.currentText = 'This is a time challenge. Type as many words as you can in 1 minute! The quick brown fox jumps over the lazy dog. The five boxing wizards jump quickly. How vexingly quick daft zebras jump!';
         break;
       case 'words':
-        const fetchedWords = await combineWords()
-        this.currentText = fetchedWords;
+        // const fetchedWords = await combineWords()
+        this.currentText = ";
         break;
       case 'random':
-        const fetchedWords = await combineWords()
-        this.currentText = fetchedWords;
-        // const randomWords = ['cat', 'dog', 'bird', 'fish', 'elephant', 'lion', 'tiger', 'bear', 'giraffe', 'zebra', 'monkey', 'penguin', 'kangaroo', 'koala', 'hippopotamus', 'rhinoceros', 'crocodile', 'turtle', 'rabbit', 'squirrel'];
-        // this.currentText = randomWords.sort(() => Math.random() - 0.5).slice(0, 10).join(' ');
+        // const fetchedWords = await combineWords()
+        // this.currentText = fetchedWords;
+        const randomWords = ['cat', 'dog', 'bird', 'fish', 'elephant', 'lion', 'tiger', 'bear', 'giraffe', 'zebra', 'monkey', 'penguin', 'kangaroo', 'koala', 'hippopotamus', 'rhinoceros', 'crocodile', 'turtle', 'rabbit', 'squirrel'];
+        this.currentText = randomWords.sort(() => Math.random() - 0.5).slice(0, 10).join(' ');
         break;
       case 'punctuation':
         this.currentText = 'This text contains punctuation marks! Can you type it accurately? Let\'s see. "The quick brown fox jumps over the lazy dog," said the narrator. "I can\'t believe it!" exclaimed the audience. Don\'t forget to use apostrophes, commas, and other punctuation marks correctly.';
