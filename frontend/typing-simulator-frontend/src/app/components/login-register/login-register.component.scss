@@ -4,7 +4,7 @@
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background-color: #f5f5f5; /* Soft gray */
+  background-color: #222222; /* Dark gray background */
   padding: 40px;
 }
 
@@ -13,7 +13,7 @@ mat-card {
   margin-bottom: 30px;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
-  background-color: #ffffff; /* White */
+  background-color: #333333; /* Darker card background */
   transition: all 0.3s ease;
 
   &:hover {
@@ -25,7 +25,7 @@ mat-card {
     font-size: 24px;
     font-weight: 500;
     margin: 20px;
-    color: #555555; /* Darker gray for better visibility */
+    color: #ffffff; /* White text */
   }
 
   mat-card-content {
@@ -38,19 +38,19 @@ mat-card {
 
         input {
           font-size: 16px;
-          color: #333333; /* Dark gray for better visibility */
+          color: #ffffff; /* White text */
         }
 
         mat-icon {
-          color: #999999; /* Light gray */
+          color: #cccccc; /* Light gray */
         }
       }
 
       button {
         align-self: flex-end;
         margin-top: 10px;
-        background-color: #4CAF50; /* Green */
-        color: #ffffff; /* White */
+        background-color: #4CAF50; /* Green button */
+        color: #ffffff; /* White text */
         font-size: 16px;
         font-weight: 500;
         padding: 10px 20px;
@@ -58,7 +58,7 @@ mat-card {
         transition: all 0.3s ease;
 
         &:hover {
-          background-color: #388E3C; /* Darker green */
+          background-color: #388E3C; /* Darker green on hover */
         }
       }
     }
@@ -84,5 +84,5 @@ mat-card {
 
 /* Adjust input text color */
 mat-form-field input {
-  color: #333333; /* Dark gray for better visibility */
+  color: #ffffff; /* White text */
 }
