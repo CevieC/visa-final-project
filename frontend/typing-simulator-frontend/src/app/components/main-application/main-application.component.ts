@@ -131,6 +131,7 @@ export class MainApplicationComponent implements OnInit {
       }
       // Call generateText() when all words are typed
       this.generateText();
+      this.typedText = "";
     } else {
       this.calculateAccuracy();
       this.calculateWPM();
