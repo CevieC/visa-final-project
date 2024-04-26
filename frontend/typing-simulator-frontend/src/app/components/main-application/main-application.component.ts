@@ -130,8 +130,8 @@ export class MainApplicationComponent implements OnInit {
         console.log('Congratulations! You completed the typing within the time limit.');
       }
       // Call generateText() when all words are typed
+      this.resetTyping();
       this.generateText();
-      this.typedText = "";
     } else {
       this.calculateAccuracy();
       this.calculateWPM();
