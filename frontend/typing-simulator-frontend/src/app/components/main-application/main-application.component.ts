@@ -51,22 +51,17 @@ export class MainApplicationComponent implements OnInit {
     this.generateText();
   }
 
-  fetchWords() {
-    try {
-      const response = fetch('https://random-word-api.herokuapp.com/word?number=10');
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      console.error('Error fetching words:', error);
-      return [];
-    }
-  }
-
-  combineWords() {
-    const words = this.fetchWords();
-    const combinedWord = words.join(' ');
-    console.log("combinedWord " , combinedWord);
-    return combinedWord;
+  fetchRandomWords() {
+    this.yourService.fetchWords().subscribe(
+      (words: string[]) => {
+        const combinedWord = words.join('');
+        console.log('Combined word:', combinedWord);
+        this.currentText = combinedWord;
+      },
+      (error) => {
+        console.error('Error fetching words:', error);
+      }
+    );
   }
 
   generateText() {
@@ -78,7 +73,7 @@ export class MainApplicationComponent implements OnInit {
         this.currentText = 'This is a time challenge. Type as many words as you can in 1 minute! The quick brown fox jumps over the lazy dog. The five boxing wizards jump quickly. How vexingly quick daft zebras jump!';
         break;
       case 'words':
-        this.combineWords()
+        this.fetchRandomWords()
         this.currentText = 'Type the following words: apple, banana, cherry, date, elderberry, fig, grape, honeydew, kiwi, lemon, mango, nectarine, orange, papaya, quince, raspberry, strawberry, tangerine, watermelon.';
         break;
       case 'random':
