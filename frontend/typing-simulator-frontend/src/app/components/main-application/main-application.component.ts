@@ -54,7 +54,7 @@ export class MainApplicationComponent implements OnInit {
   fetchWords() {
     try {
       const response = fetch('https://random-word-api.herokuapp.com/word?number=10');
-      const data = response.json();
+      const data = await response.json();
       return data;
     } catch (error) {
       console.error('Error fetching words:', error);
