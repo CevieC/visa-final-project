@@ -62,7 +62,13 @@ export class MainApplicationComponent implements OnInit {
     }
   }
 
-  generateText() {
+  async function combineWords() {
+    const words = await fetchWords();
+    const combinedWord = words.join(' ');
+    return combinedWord;
+  }
+
+  async generateText() {
     switch (this.selectedMode) {
       case 'default':
         this.fetchRandomParagraph();
@@ -71,7 +77,8 @@ export class MainApplicationComponent implements OnInit {
         this.currentText = 'This is a time challenge. Type as many words as you can in 1 minute! The quick brown fox jumps over the lazy dog. The five boxing wizards jump quickly. How vexingly quick daft zebras jump!';
         break;
       case 'words':
-        this.currentText = 'Type the following words: apple, banana, cherry, date, elderberry, fig, grape, honeydew, kiwi, lemon, mango, nectarine, orange, papaya, quince, raspberry, strawberry, tangerine, watermelon.';
+        const fetchedWords = await combineWords()
+        this.currentText = fetchedWords;
         break;
       case 'random':
         const randomWords = ['cat', 'dog', 'bird', 'fish', 'elephant', 'lion', 'tiger', 'bear', 'giraffe', 'zebra', 'monkey', 'penguin', 'kangaroo', 'koala', 'hippopotamus', 'rhinoceros', 'crocodile', 'turtle', 'rabbit', 'squirrel'];
