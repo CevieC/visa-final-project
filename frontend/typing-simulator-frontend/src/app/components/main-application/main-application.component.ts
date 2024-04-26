@@ -129,6 +129,8 @@ export class MainApplicationComponent implements OnInit {
         // User completed typing within the time limit
         console.log('Congratulations! You completed the typing within the time limit.');
       }
+      // Call generateText() when all words are typed
+      this.generateText();
     } else {
       this.calculateAccuracy();
       this.calculateWPM();
@@ -175,8 +177,6 @@ export class MainApplicationComponent implements OnInit {
     const typed = this.typedText.split('');
     const total = this.currentText.split('');
     this.progress = (typed.length / total.length) * 100;
-    console.log(this.progress)
-    if(this.progress >= 100) this.generateText();
   }
 
   onModeChange() {
