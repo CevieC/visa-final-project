@@ -25,7 +25,7 @@ mat-card {
     font-size: 24px;
     font-weight: 500;
     margin: 20px;
-    color: #333333; /* Dark gray */
+    color: #555555; /* Darker gray for better visibility */
   }
 
   mat-card-content {
@@ -38,7 +38,7 @@ mat-card {
 
         input {
           font-size: 16px;
-          color: #333333; /* Dark gray */
+          color: #333333; /* Dark gray for better visibility */
         }
 
         mat-icon {
@@ -80,4 +80,9 @@ mat-card {
       }
     }
   }
+}
+
+/* Adjust input text color */
+mat-form-field input {
+  color: #333333; /* Dark gray for better visibility */
 }
