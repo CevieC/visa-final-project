@@ -175,6 +175,7 @@ export class MainApplicationComponent implements OnInit {
     const typed = this.typedText.split('');
     const total = this.currentText.split('');
     this.progress = (typed.length / total.length) * 100;
+    console.log(this.progress)
     if(this.progress >= 100) this.generateText();
   }
 
