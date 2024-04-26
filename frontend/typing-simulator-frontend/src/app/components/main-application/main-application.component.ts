@@ -167,14 +167,12 @@ export class MainApplicationComponent implements OnInit {
     const typed = this.typedText.split('');
     const actual = this.currentText.slice(0, typed.length).split('');
     this.isCorrect = typed.every((char, index) => char === actual[index]);
-    console.log("this.isCorrect" , this.isCorrect)
   }
 
   updateProgress() {
     const typed = this.typedText.split('');
     const total = this.currentText.split('');
     this.progress = (typed.length / total.length) * 100;
-    console.log("this.progress" , this.progress)
   }
 
   onModeChange() {
