@@ -61,7 +61,7 @@ export class MainApplicationComponent implements OnInit {
     console.log("Calling")
     this.fetchWords().subscribe(
       (words: string[]) => {
-        const combinedWord = words.join('');
+        const combinedWord = words.join(' ');
         console.log('Combined word:', combinedWord);
         this.currentText = combinedWord;
       },
@@ -82,7 +82,7 @@ export class MainApplicationComponent implements OnInit {
         break;
       case 'words':
         this.fetchRandomWords()
-        this.currentText = 'Type the following words: apple, banana, cherry, date, elderberry, fig, grape, honeydew, kiwi, lemon, mango, nectarine, orange, papaya, quince, raspberry, strawberry, tangerine, watermelon.';
+        // this.currentText = 'Type the following words: apple, banana, cherry, date, elderberry, fig, grape, honeydew, kiwi, lemon, mango, nectarine, orange, papaya, quince, raspberry, strawberry, tangerine, watermelon.';
         break;
       case 'random':
         const randomWords = ['cat', 'dog', 'bird', 'fish', 'elephant', 'lion', 'tiger', 'bear', 'giraffe', 'zebra', 'monkey', 'penguin', 'kangaroo', 'koala', 'hippopotamus', 'rhinoceros', 'crocodile', 'turtle', 'rabbit', 'squirrel'];
@@ -175,6 +175,7 @@ export class MainApplicationComponent implements OnInit {
     const typed = this.typedText.split('');
     const total = this.currentText.split('');
     this.progress = (typed.length / total.length) * 100;
+    if(this.progress >= 100) this.generateText();
   }
 
   onModeChange() {
