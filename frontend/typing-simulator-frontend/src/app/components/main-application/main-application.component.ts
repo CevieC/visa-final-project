@@ -51,8 +51,13 @@ export class MainApplicationComponent implements OnInit {
     this.generateText();
   }
 
+  fetchWords(): Observable<string[]> {
+    const apiUrl = 'https://random-word-api.herokuapp.com/word?number=10';
+    return this.http.get<string[]>(apiUrl, { responseType: 'json' });
+  }
+
   fetchRandomWords() {
-    this.yourService.fetchWords().subscribe(
+    this.fetchWords().subscribe(
       (words: string[]) => {
         const combinedWord = words.join('');
         console.log('Combined word:', combinedWord);
